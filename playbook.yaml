@@ -1,6 +1,6 @@
 ---
 
-- hosts: 10.0.0.210
+- hosts: 192.168.0.43
 
   tasks:
   - name: Installation du serveur Nginx, Mariadb et PHP
