@@ -1,0 +1,34 @@
+---
+
+- hosts: 10.0.0.210
+
+  tasks:
+  - name: Installation du serveur Nginx, Mariadb et PHP
+    dnf:
+     name: "{{ item }}"
+     state: present
+    loop:
+      - nginx
+      - php
+      - mariadb-server
+
+  - name: Démarrage du serveur nginx
+    systemd:
+     name: "{{ item }}"
+     state: started
+    loop:
+      - nginx
+      - mariadb
+
+  - name: Suppression du fichier index.html
+    file:
+     path: /var/www/html/index.html
+     state: absent
+  - name: Copie des fichiers php
+    copy:
+     src: "{{ item }}"
+     dest: /var/www/html/
+    loop:
+     - index.php
+     - create_db.php
+     - create_table.php
