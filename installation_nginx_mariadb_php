@@ -1,0 +1,11 @@
+---
+- hosts: 192.168.0.41
+   tasks:
+    - name: Installation de nginx
+      dnf: 
+      name=nginx 
+      state=latest
+    - name: start nginx
+      service:
+          name: nginx
+          state: started
